@@ -26,7 +26,11 @@ class Snippet < ActiveRecord::Base
 end
 
 get "/" do
-  @snippet = Snippet.random
+  redirect "/#{rand(count) + 1}"
+end
+
+get "/:id" do
+  @snippet = Snippet.find params[:id]
   @choices = Codebase.all.shuffle.take 4
   @choices[rand 4] = @snippet.codebase unless @choices.include? @snippet.codebase
   erb :index
