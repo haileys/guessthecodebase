@@ -1,0 +1,115 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+body {
+    font-family:"Droid Sans";
+}
+
+.container {
+    width:880px;
+    height:auto;
+    margin:32px auto;
+}
+
+h1 {
+    display:block;
+    text-align:center;
+    font-size:56px;
+    height:64px;
+    line-height:64px;
+    margin-bottom:24px;
+    text-shadow:1px 1px 1px #999999;
+}
+
+@mixin gradient($from, $to) {
+    background-color:$from;
+    background-image: -webkit-gradient(linear, left top, left bottom, from($from), to($to)); /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(top, $from, $to); /* Chrome 10+, Saf5.1+, iOS 5+ */
+    background-image:    -moz-linear-gradient(top, $from, $to); /* FF3.6 */
+    background-image:     -ms-linear-gradient(top, $from, $to); /* IE10 */
+    background-image:      -o-linear-gradient(top, $from, $to); /* Opera 11.10+ */
+    background-image:         linear-gradient(top, $from, $to);
+}
+@mixin border-radius($r) {
+    -webkit-border-radius:$r;
+    -moz-border-radius:$r;
+    border-radius:$r;
+}
+
+.CodeRay {
+    @include gradient(#efefef, #e3e3e3);
+    @include border-radius(8px);
+    padding:16px 24px;
+    line-height:20px;
+    font-size:14px;
+    font-family:"Droid Sans Mono", Monaco, Consolas, monospace;
+    text-shadow:1px 1px 1px #bebebe;
+    margin-bottom:20px;
+}
+
+.choices {
+    height:60px;
+    margin-bottom:20px;
+    
+    button {
+        @include gradient(#e6f5ff, #d5efff);
+        @include border-radius(8px);
+        text-shadow:1px 1px 1px #cccccc;
+        cursor:pointer;
+        border:none;
+        padding:20px 0px;
+        font-size:16px;
+        float:left;
+        width:205px;
+        margin-right:20px;
+        &:hover {
+            @include gradient(#1ba7fe, #0179c3);
+            color:#ffffff;
+            text-shadow:1px 1px 1px #015991;
+        }
+        &:last-child {
+            margin-right:0px;
+        }
+    }
+}
+
+.incorrect {
+    @include gradient(#faa6a8, #f87679);
+}
+
+.correct {
+    @include gradient(#c0edd6, #8cddb3)
+}
+
+.incorrect, .correct {
+    @include border-radius(8px);
+    display:none;
+    padding:8px 16px;
+    height:auto;
+    margin-bottom:20px;
+    h2, p {
+        float:left;
+        height:48px;
+        line-height:48px;
+        vertical-align:middle;
+    }
+    h2 {
+        width:160px;
+    }
+    .clear {
+        clear:both;
+    }
+}
+
+.try_again {
+    text-align:center;
+    display:none;
+    a {
+        color:#0061a2;
+        &:hover {
+            color:#0094f7;
+        }
+    }
+}

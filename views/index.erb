@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>guess the codebase</title>
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+  <link href="/style.scss" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <h1>guess the codebase</h1>
+    <%== @snippet.formatted_code %>
+    <div class="choices">
+      <% @choices.each do |choice| %>
+        <button data-correct="<%= (choice == @snippet.codebase).inspect %>"><%= choice.name %></button>
+      <% end %>
+    </div>
+    <div class="incorrect">
+      <h2>Nope!</h2>
+      <p>
+        That snippet is actually from <strong><%= @snippet.codebase.name %></strong>'s <%= @snippet.file %>!
+      </p>
+      <div class="clear"></div>
+    </div>
+    <div class="correct">
+      <h2>Correct!</h2>
+      <p>
+        Great work! That snippet is indeed from <strong><%= @snippet.codebase.name %></strong>, in <%= @snippet.file %>.
+      </p>
+      <div class="clear"></div>
+    </div>
+    <div class="try_again">
+      <a href="/">Try again?</a>
+    </div>
+  </div>
+</body>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
+$(function() {
+  $("button").click(function() {
+    var me = $(this);
+    $(".choices").slideUp('fast', function() {
+      if(me.attr("data-correct") == "true") {
+        $(".correct").slideDown('fast');
+      } else {
+        $(".incorrect").slideDown('fast');
+      }
+      $(".try_again").fadeIn("slow");
+    });
+  });
+});
+</script>
+</html>
