@@ -26,7 +26,11 @@ class Snippet < ActiveRecord::Base
 end
 
 get "/" do
-  redirect "/#{rand(count) + 1}"
+  redirect "/#{rand(Snippet.count) + 1}"
+end
+
+get "/style.scss" do
+  scss :style
 end
 
 get "/:id" do
@@ -34,8 +38,4 @@ get "/:id" do
   @choices = Codebase.all.shuffle.take 4
   @choices[rand 4] = @snippet.codebase unless @choices.include? @snippet.codebase
   erb :index
-end
-
-get "/style.scss" do
-  scss :style
 end
